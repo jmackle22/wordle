@@ -2,8 +2,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Wordle {
-    public static int line;
-    public static int wins;
+    public int line;
+    public int wins;
+    public int losses;
     private Character[][] grid;
     private String solution;
     private Words dict;
@@ -16,14 +17,16 @@ public class Wordle {
                 grid[i][j] = '-';
 
         line = 0;
+        wins = 0;
+        losses = 0;
         dict = new Words();
         sc = new Scanner(System.in);
     }
 
     // game loop
     public void play() throws IOException {
-        solution = "theta";// dict.randomSolution();
-        System.out.println("random solution: " + solution);
+        solution = dict.randomSolution();
+        //System.out.println("random solution: " + solution);
 
         String guess = "";
 
@@ -39,6 +42,17 @@ public class Wordle {
         }
 
         displayGrid();
+
+        // state win/loss and stats
+        if (guess.equals(solution)) {
+            wins++;
+            System.out.println("Splendid");
+        } else {
+            losses++;
+            System.out.println("The correct solution was \"" + solution + "\".");
+        }
+        System.out.println("Total wins: " + wins + ". Total losses: " + losses +
+                "\nWin percentage: " + ((double)wins/(wins+losses))*100 + "%");
     }
 
     public void displayGrid() {

@@ -7,7 +7,13 @@ public class WordleRunner {
         Words dict = new Words();
         Wordle game = new Wordle();
 
-        game.play();
+        boolean quit = false;
+        while (!quit) {
+            game.play();
+            System.out.println("Would you like to play again? (y/n)");
+            if (john.nextLine().equals("n")) quit = true;
+        }
 
+        System.out.println("\"Thanks for playing wordle boginga\" - William Thomas Christening");
     }
 }

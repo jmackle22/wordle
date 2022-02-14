@@ -26,7 +26,6 @@ public class Wordle {
     // game loop
     public void play() throws IOException {
         solution = dict.randomSolution();
-        //System.out.println("random solution: " + solution);
 
         String guess = "";
 
@@ -53,6 +52,15 @@ public class Wordle {
         }
         System.out.println("Total wins: " + wins + ". Total losses: " + losses +
                 "\nWin percentage: " + ((double)wins/(wins+losses))*100 + "%");
+
+        // reset board
+        grid = new Character[6][5];
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid[0].length; j++)
+                grid[i][j] = '-';
+
+        line = 0;
+        sc = new Scanner(System.in);
     }
 
     public void displayGrid() {
